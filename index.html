@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wei Qiang's Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+            color: white;
+            scroll-behavior: smooth;
+        }
+        body {
+            background: url('images/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+        header nav {
+            display: flex;
+            gap: 20px;
+        }
+        header a {
+            text-decoration: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 120px 20px 20px;
+        }
+        #about {
+            max-width: 800px; 
+            margin: 0 auto;   
+            padding: 20px;    
+            text-align: center; 
+        }
+        #projects-container {
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .project {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 1000px;
+            margin: 40px 0;
+            gap: 20px;
+        }
+        .project-text {
+            flex: 1;
+            text-align: left;
+        }
+        .gallery {
+            flex: 1;
+            display: flex;
+            position: relative;
+            width: 500px;
+            height: 300px;
+            overflow: hidden;
+        }
+        .gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+        .gallery img.active {
+            opacity: 1;
+        }
+        .gallery button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        .gallery button:hover {
+            background: rgba(255, 255, 255, 0.8);
+            color: black;
+        }
+        .gallery .prev { left: 10px; }
+        .gallery .next { right: 10px; }
+        .description {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            text-align: center;
+            font-size: 1rem;
+            color: white;
+            display: none;
+        }
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            text-decoration: underline;
+        }
+
+        .link {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Wei Qiang</h1>
+        <nav>
+            <a href="#about">About Me</a>
+            <a href="#projects">Projects</a>
+            <a href="https://www.linkedin.com/in/tangweiqiang/" target="_blank">LinkedIn</a>
+        </nav>
+    </header>
+    
+    <section id="about" class="section">
+        <h2>Hello, I am Wei Qiang</h2>
+        <p><br>I am a game developer from Singapore.<br><br>I've expressed an interest in game design since an early age of 13. Having enrolled in game design schools widened my
+            eyes to the world of game development as a whole. By tapping into the schools' and the internet's resources, I was
+            equipped with the relevant skills to create game prototypes of my own! As a well-rounded passionate game developer, I
+            wish to expand my knowledge of game development, learning and sharing with other developers!
+            <br><br>I am equipped with a wide range of development skills like C#, javascript, and Python. My proficiency lies in Unity, where I have more than 5 years of experience in. I have also been using software like Adobe Photoshop, Adobe After Effects, and Autodesk Maya in my game development journey, and I am currently learning how to use blender.
+            <br><br><br>Feel free to contact me at:<br>tangwq.contact@gmail.com</p>
+    </section>
+    
+    <section id="projects" class="section">
+        <h2>Projects</h2>
+        <div id="projects-container"></div>
+    </section>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll("header a").forEach(anchor => {
+                anchor.addEventListener("click", function(e) {
+                    const href = this.getAttribute("href");
+                    if (href.startsWith("#")) { // Only prevent default if it's an internal link
+                        e.preventDefault();
+                        let target = document.querySelector(href);
+                        window.scrollTo({
+                            top: target.offsetTop - 50,
+                            behavior: "smooth"
+                        });
+                    }
+                });
+            });
+
+            const projects = [
+                { 
+                    name: "Syngularity", 
+                    summary: "\nSyngularity was a project developed in Unity for my Final Year Project in 2015.\n\nMade for the Oculus Rift, Syngularity is a Virtual Reality (VR) puzzle game that puts you in the shoes of a superintelligent AI.\n\nSyngularity was one of the pioneer VR projects in NYP back in 2015. Being a part of the development was an amazing experience!\n\nThe link to the project is not available, please contact me for more details!", 
+                    images: ["images/P_Syngularity/banner.jpg", "images/P_Syngularity/player.png", "images/P_Syngularity/level1.png", "images/P_Syngularity/level2.png"],
+                    descriptions: ["Main banner of Syngularity", "The player is unable to move, and is given 2 guns - one that shoots, and one that acts like an arm", "A game environment where players have the joy of experiencing interacting with the world via VR", "The player breaking environmental objects"]
+                },
+                { 
+                    name: "Pulverize!", 
+                    summary: "\nPulverize! was developed in Unity and published by me during my tenure at Aruki Games.\n\nIn this fast paced action game, players challenge each other to survive as neverending waves of enemies pour into the arena. Players dash around the arena using slingshot mechanics, avoiding hazards, collecting powerups, and destroy enemies!\n\nMade for android, the game was heavily equipped with google features. Players are able to connect to the game by logging in with their google account, and claim in-game rewards by watching ads.\n\nThe link to the project is not available, please contact me for more details!", 
+                    images: ["images/P_Pulverize/ss1.webp", "images/P_Pulverize/ss2.webp", "images/P_Pulverize/ss3.webp", "images/P_Pulverize/ss4.webp", "images/P_Pulverize/newupdate.jpg"],
+                    descriptions: ["The player dashing (the main movement of the game) in an arena", "The player is able to collect powerups to enhance themselves", "Eliminating an enemy with the powerup", "Highscores are recorded and tied to your google account", "The game went through an update!"]
+                },
+                { 
+                    name: "Singaporean Life", 
+                    summary: "\nSingaporean Life was developed in Unity by Aruki Games for a game jam.\n\nIn this platform jumper, players take on the role of being a Singaporean, from an infant to old age. They experience life in Singapore as they grow up, study, play, and work. The game pokes fun at certain stereotypes and perspective on life in Singapore in order to challenge the state of our current reality.\n\n<a href='https://arukigames.itch.io/singaporean-life-game-jam' class='link' target='_blank'>Play the game here!</a>", 
+                    images: ["images/P_SingaporeanLife/ss1.jpg", "images/P_SingaporeanLife/ss2.jpg"],
+                    descriptions: ["Deciding which path of the game to take", "A full achievement showcase!"]
+                },
+                { 
+                    name: "Project: Defiance", 
+                    summary: "\nProject: Defiance was developed in Unity by Aruki Games.\n\nIn this 2d roguelite platformer, players take on the role of a hero whose soul has been sent down to the underworld. The player is able to progress the game through exploration and combat.\n\n<a href='https://arukigames.itch.io/defiance' class='link' target='_blank'>Play the alpha here!</a>", 
+                    images: ["images/P_Defiance/banner.jpg"],
+                    descriptions: ["Main banner of Project: Defiance"]
+                },
+                { 
+                    name: "OakVault", 
+                    summary: "\nOakVault is a 3D application developed on Unity by Oaktech.\n\nIn this application, users can view their virtual assets in our virtual world! If they own a Raya virtual asset created by Oaktech, they are able to create poses with Raya and interact with her through augmented reality (AR).\n\n<a href='https://opensea.io/OaKTech' class='link' target='_blank'>Check out the collection here!</a>", 
+                    images: ["images/P_OakVault/ss1.jpg", "images/P_OakVault/ss2.jpg", "images/P_OakVault/ss3.jpg"],
+                    descriptions: ["Raya in her default pose", "Raya in a new environment", "Users are given full control on how Raya can be posed"]
+                },
+            ];
+
+
+            const projectsContainer = document.getElementById("projects-container");
+            projects.forEach((project, idx) => {
+                let projectHTML = `
+                    <div class="project">
+                        <div class="project-text">
+                            <h3>${project.name}</h3>
+                            <p>${project.summary.replace(/\n/g, '<br>')}</p>
+                        </div>
+                        <div class="gallery" id="gallery${idx}">
+                            <button class="prev">&#10094;</button>
+                            ${project.images.map((img, i) => `
+                                <div class="image-container">
+                                    <img src="${img}" class="${i === 0 ? 'active' : ''}" alt="${project.name} Image">
+                                    <div class="description" style="display: ${i === 0 ? 'block' : 'none'}">${project.descriptions[i]}</div>
+                                </div>
+                            `).join('')}
+                            <button class="next">&#10095;</button>
+                        </div>
+                    </div>
+                `;
+                projectsContainer.innerHTML += projectHTML;
+            });
+
+
+            document.querySelectorAll(".gallery").forEach(gallery => {
+                let images = gallery.querySelectorAll("img");
+                let descriptions = gallery.querySelectorAll(".description");
+                let index = 0;
+                let prevButton = gallery.querySelector(".prev");
+                let nextButton = gallery.querySelector(".next");
+
+                nextButton.addEventListener("click", () => {
+                    images[index].classList.remove("active");
+                    descriptions[index].style.display = "none"; // Hide current description
+                    index = (index + 1) % images.length;
+                    images[index].classList.add("active");
+                    descriptions[index].style.display = "block"; // Show new description
+                });
+
+                prevButton.addEventListener("click", () => {
+                    images[index].classList.remove("active");
+                    descriptions[index].style.display = "none"; // Hide current description
+                    index = (index - 1 + images.length) % images.length;
+                    images[index].classList.add("active");
+                    descriptions[index].style.display = "block"; // Show new description
+                });
+            });
+        });
+    </script>
+</body>
+</html>
